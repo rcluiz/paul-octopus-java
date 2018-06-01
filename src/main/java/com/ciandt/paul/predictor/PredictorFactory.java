@@ -1,9 +1,11 @@
-package com.ciandt.paul;
+package com.ciandt.paul.predictor;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.ciandt.paul.Config;
 
 /**
  * Creates the predictor algorithm
@@ -31,7 +33,7 @@ public class PredictorFactory {
         Predictor predictor = null;
 
         try {
-            Class clazz = Class.forName("com.ciandt.paul." + strPredictor);
+            Class<?> clazz = Class.forName("com.ciandt.paul.predictor." + strPredictor);
             predictor = (Predictor) clazz.newInstance();
         } catch (ClassNotFoundException e) {
             logger.error("Predictor class not found: " + strPredictor);

@@ -1,16 +1,17 @@
 package com.ciandt.paul.utils;
 
-import com.ciandt.paul.Config;
-import com.google.cloud.storage.Blob;
-import com.google.cloud.storage.BlobInfo;
-import com.google.cloud.storage.Storage;
-import com.google.cloud.storage.StorageOptions;
+import java.io.IOException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
+import com.ciandt.paul.Config;
+import com.google.cloud.storage.Blob;
+import com.google.cloud.storage.BlobInfo;
+import com.google.cloud.storage.Storage;
+import com.google.cloud.storage.StorageOptions;
 
 /**
  * Utility class to handle GCS operations
@@ -24,8 +25,7 @@ public class GCSUtils {
     private Config config;
 
     private static Storage storage;
-    private final static String CREDENTIALS_PATH = "project-paul-the-octopus-secret.json";
-
+    
     /**
      * Read the content of a text file from GCS
      */

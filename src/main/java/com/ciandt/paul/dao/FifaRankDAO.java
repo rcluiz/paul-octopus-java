@@ -1,16 +1,5 @@
 package com.ciandt.paul.dao;
 
-import com.ciandt.paul.Config;
-import com.ciandt.paul.entity.FifaRank;
-import com.ciandt.paul.utils.BigQueryUtils;
-import com.ciandt.paul.utils.GCSUtils;
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVRecord;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
@@ -19,13 +8,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVRecord;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ciandt.paul.Config;
+import com.ciandt.paul.entity.FifaRank;
+import com.ciandt.paul.utils.BigQueryUtils;
+import com.ciandt.paul.utils.GCSUtils;
+
 /**
  * Class responsible for reading Fifa Rank data
  */
 @Service
 public class FifaRankDAO {
-
-    private static Logger logger = LoggerFactory.getLogger(FifaRankDAO.class.getName());
 
     @Autowired
     private Config config;
@@ -37,16 +34,18 @@ public class FifaRankDAO {
     private static Map<Integer, List<FifaRank>> cache;
 
     static {
-        cache = new HashMap();
+        cache = new HashMap<Integer, List<FifaRank>>();
     }
 
     /**
      * Read the rank for a specific team and year
      */
     public FifaRank fetch(String teamName, Integer year) throws IOException, InterruptedException, DataNotAvailableException {
-        List<FifaRank> fifaRankList = this.fetch(year);
-        for (FifaRank fifaRank : fifaRankList) {
-            if (teamName.equals(fifaRank.getTeamName())) {
+    	List<FifaRank> fifaRankList = this.fetch(year);
+    	String cleanTeamName = teamName.replaceAll("[^\\p{Alpha}]+"," ");
+    	for (FifaRank fifaRank : fifaRankList) {
+    		String fifaRankTeamName = fifaRank.getTeamName().replaceAll("[^\\p{Alpha}]+"," ");
+        	if (cleanTeamName.equalsIgnoreCase(fifaRankTeamName)) {
                 return fifaRank;
             }
         }
@@ -81,7 +80,7 @@ public class FifaRankDAO {
         } else {
             List<List<String>> queryResult = null;
 
-            String query = "SELECT * FROM paul_the_octopus_dataset.fifa_rank LIMIT 300";
+            String query = "SELECT * FROM paul_the_octopus_dataset.fifa_rank LIMIT 3000";
             queryResult = bigQueryUtils.executeQuery(query);
 
             if ((queryResult == null) || (queryResult.size() == 0)) {
@@ -95,6 +94,7 @@ public class FifaRankDAO {
         }
 
         cache.put(year, fifaRankList);
+        
         return fifaRankList;
     }
 }

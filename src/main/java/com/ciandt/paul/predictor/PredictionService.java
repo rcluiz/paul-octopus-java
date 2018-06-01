@@ -1,13 +1,15 @@
-package com.ciandt.paul;
+package com.ciandt.paul.predictor;
 
-import com.ciandt.paul.context.Context;
-import com.ciandt.paul.context.ContextBuilder;
-import com.ciandt.paul.dao.DataNotAvailableException;
-import com.ciandt.paul.dao.MatchDAO;
-import com.ciandt.paul.entity.HistoricalMatch;
-import com.ciandt.paul.entity.Match;
-import com.ciandt.paul.entity.Prediction;
-import com.ciandt.paul.utils.GCSUtils;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.io.FileUtils;
@@ -16,10 +18,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.*;
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.List;
+import com.ciandt.paul.Config;
+import com.ciandt.paul.context.Context;
+import com.ciandt.paul.context.ContextBuilder;
+import com.ciandt.paul.dao.DataNotAvailableException;
+import com.ciandt.paul.dao.MatchDAO;
+import com.ciandt.paul.entity.HistoricalMatch;
+import com.ciandt.paul.entity.Match;
+import com.ciandt.paul.entity.Prediction;
+import com.ciandt.paul.utils.GCSUtils;
 
 /**
  * Handles feed requests and processing
@@ -162,6 +169,8 @@ public class PredictionService {
             logger.debug("CSV content generated:");
             logger.debug(csvContent);
         }
+        
+        csvPrinter.close();
 
         return csvContent;
     }

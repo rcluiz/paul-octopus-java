@@ -1,11 +1,15 @@
-package com.ciandt.paul;
+package com.ciandt.paul.predictor;
 
+import com.ciandt.paul.Config;
 import com.ciandt.paul.context.ContextBuilder;
 import com.ciandt.paul.dao.FifaRankDAO;
 import com.ciandt.paul.dao.MatchDAO;
 import com.ciandt.paul.dao.TeamHistoryDAO;
 import com.ciandt.paul.entity.HistoricalMatch;
 import com.ciandt.paul.entity.Prediction;
+import com.ciandt.paul.predictor.PredictionService;
+import com.ciandt.paul.predictor.Predictor;
+import com.ciandt.paul.predictor.PredictorFactory;
 import com.ciandt.paul.utils.BigQueryUtils;
 import com.ciandt.paul.utils.GCSUtils;
 import org.junit.Before;

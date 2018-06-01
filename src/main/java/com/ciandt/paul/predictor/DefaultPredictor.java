@@ -1,4 +1,4 @@
-package com.ciandt.paul;
+package com.ciandt.paul.predictor;
 
 import com.ciandt.paul.context.Context;
 import com.ciandt.paul.entity.Match;

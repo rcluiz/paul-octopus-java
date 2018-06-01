@@ -1,10 +1,10 @@
 package com.ciandt.paul.context;
 
+import java.util.List;
+
 import com.ciandt.paul.entity.FifaRank;
 import com.ciandt.paul.entity.HistoricalMatch;
 import com.ciandt.paul.entity.TeamHistory;
-
-import java.util.List;
 
 /**
  * Context with data to be used to create a prediction
@@ -16,8 +16,7 @@ public class Context {
     private FifaRank homeFifaRank;
     private FifaRank awayFifaRank;
     private List<HistoricalMatch> historicalMatches;
-    private ContextBuilder contextBuilder;
-
+    
     /**
      * Constructor
      */

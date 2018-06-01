@@ -1,15 +1,22 @@
 package com.ciandt.paul;
 
-import org.apache.commons.cli.*;
+import java.io.IOException;
+
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.cli.Option;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
 
-import java.io.IOException;
+import com.ciandt.paul.predictor.PredictionService;
 
 /**
  * This is the basic Application class. When you run the command line, this is the first class that will be called
@@ -25,11 +32,6 @@ public class Application implements CommandLineRunner {
 
     @Autowired
     private Config config;
-
-    @Autowired
-    private ApplicationContext context;
-
-    private static final String[] validCommands = {"predict", "upload"};
 
     /**
      * Init method called by the runtime execution engine

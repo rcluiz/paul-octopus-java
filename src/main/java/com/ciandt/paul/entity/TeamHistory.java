@@ -1,8 +1,8 @@
 package com.ciandt.paul.entity;
 
-import org.apache.commons.csv.CSVRecord;
-
 import java.util.List;
+
+import org.apache.commons.csv.CSVRecord;
 
 public class TeamHistory {
 

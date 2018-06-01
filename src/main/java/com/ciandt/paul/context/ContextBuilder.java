@@ -1,14 +1,15 @@
 package com.ciandt.paul.context;
 
+import java.io.IOException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.ciandt.paul.dao.DataNotAvailableException;
 import com.ciandt.paul.dao.FifaRankDAO;
 import com.ciandt.paul.dao.MatchDAO;
 import com.ciandt.paul.dao.TeamHistoryDAO;
 import com.ciandt.paul.entity.Match;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.io.IOException;
 
 /**
  * Builds the context for the predictive algorithm

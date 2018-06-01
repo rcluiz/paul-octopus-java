@@ -1,19 +1,20 @@
 package com.ciandt.paul.dao;
 
-import com.ciandt.paul.Config;
-import com.ciandt.paul.entity.HistoricalMatch;
-import com.ciandt.paul.entity.Match;
-import com.ciandt.paul.utils.BigQueryUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ciandt.paul.Config;
+import com.ciandt.paul.entity.HistoricalMatch;
+import com.ciandt.paul.entity.Match;
+import com.ciandt.paul.utils.BigQueryUtils;
 
 /**
  * Class responsible for reading matches data

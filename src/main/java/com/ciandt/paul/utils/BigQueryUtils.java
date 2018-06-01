@@ -1,16 +1,23 @@
 package com.ciandt.paul.utils;
 
-import com.ciandt.paul.Config;
-import com.google.cloud.bigquery.*;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import com.ciandt.paul.Config;
+import com.google.cloud.bigquery.BigQuery;
+import com.google.cloud.bigquery.BigQueryOptions;
+import com.google.cloud.bigquery.FieldValueList;
+import com.google.cloud.bigquery.JobId;
+import com.google.cloud.bigquery.JobInfo;
+import com.google.cloud.bigquery.QueryJobConfiguration;
+import com.google.cloud.bigquery.TableResult;
 
 /**
  * Utility class to handle Big Query operations
@@ -24,10 +31,7 @@ public class BigQueryUtils {
     private Config config;
 
     private static BigQuery bigQuery;
-    private final static String CREDENTIALS_PATH = "project-paul-the-octopus-secret.json";
-
-
-
+    
     /**
      * Executes a query on BigQuery
      *
@@ -69,8 +73,6 @@ public class BigQueryUtils {
             throw new RuntimeException(queryJob.getStatus().getError().toString());
         }
 
-        QueryResponse response = bigquery.getQueryResults(jobId);
-
         TableResult tableResult = queryJob.getQueryResults();
 
         // Print all pages of the results.
@@ -83,7 +85,7 @@ public class BigQueryUtils {
         }
 
         if (config.isDebugEnabled()) {
-            logger.debug("Returing: " + result.size());
+            logger.debug("Retunring: " + result.size());
         }
 
         return result;

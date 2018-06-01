@@ -1,15 +1,14 @@
 package com.ciandt.paul.entity;
 
-import org.apache.commons.csv.CSVRecord;
-
 import java.util.List;
+
+import org.apache.commons.csv.CSVRecord;
 
 /**
  * Fifa rank for a specific year
  */
 public class FifaRank {
 
-    private Integer year;
     private Integer rank;
     private String teamCode;
     private String teamName;
@@ -35,10 +34,6 @@ public class FifaRank {
         this.setPoints(Integer.parseInt(record.get(3)));
     }
 
-    public Integer getYear() {
-        return year;
-    }
-
     public Integer getRank() {
         return rank;
     }
@@ -53,10 +48,6 @@ public class FifaRank {
 
     public Integer getPoints() {
         return points;
-    }
-
-    private void setYear(Integer year) {
-        this.year = year;
     }
 
     private void setRank(Integer rank) {
@@ -78,8 +69,7 @@ public class FifaRank {
     @Override
     public String toString() {
         return "FifaRank{" +
-                "year=" + year +
-                ", rank=" + rank +
+                "rank=" + rank +
                 ", teamCode='" + teamCode + '\'' +
                 ", teamName='" + teamName + '\'' +
                 ", points=" + points +
